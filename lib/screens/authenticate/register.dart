@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pantrily/services/auth.dart';
 
 class Register extends StatefulWidget {
+  final Function toggleView;
+  Register({this.toggleView});
+
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -21,6 +24,15 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.green[500],
         elevation: 0.0,
         title: Text("Sign up to Pantrily!"),
+        actions: [
+          FlatButton.icon(
+            onPressed: () {
+              widget.toggleView();
+            },
+            icon: Icon(Icons.person),
+            label: Text("Sign In"),
+          ),
+        ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -52,7 +64,7 @@ class _RegisterState extends State<Register> {
                 },
                 color: Colors.pink[500],
                 child: Text(
-                  "Sign Up",
+                  "Register",
                   style: TextStyle(color: Colors.white),
                 ),
               ),
