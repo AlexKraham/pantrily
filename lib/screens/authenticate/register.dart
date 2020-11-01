@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pantrily/services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
 
   // text field state
@@ -20,7 +20,7 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.green[500],
         elevation: 0.0,
-        title: Text("Sign in to Pantrily!"),
+        title: Text("Sign up to Pantrily!"),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -52,7 +52,7 @@ class _SignInState extends State<SignIn> {
                 },
                 color: Colors.pink[500],
                 child: Text(
-                  "Sign In",
+                  "Sign Up",
                   style: TextStyle(color: Colors.white),
                 ),
               ),
