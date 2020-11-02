@@ -4,6 +4,7 @@ import 'package:pantrily/models/brew.dart';
 import 'package:pantrily/models/pantry.dart';
 import 'package:pantrily/screens/home/brew_list.dart';
 import 'package:pantrily/screens/home/list.dart';
+import 'package:pantrily/screens/home/settings_form.dart';
 import 'package:pantrily/services/auth.dart';
 import 'package:pantrily/services/database.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class Home extends StatelessWidget {
           builder: (context) {
             return Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-              child: Text("bottom sheet"),
+              child: SettingsForm(),
             );
           });
     }
