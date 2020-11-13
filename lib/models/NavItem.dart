@@ -26,6 +26,11 @@ class NavItems extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool checkSameIndex({int index}) {
+    if (selectedIndex == index) return true;
+    return false;
+  }
+
   List<NavItem> items = [
     NavItem(
       id: 1,

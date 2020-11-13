@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pantrily/screens/authenticate/authenticate.dart';
 import 'package:pantrily/screens/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pantrily/services/auth.dart';
@@ -35,6 +36,9 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           home: Wrapper(),
+          routes: <String, WidgetBuilder>{
+            '/authenticate': (BuildContext context) => new Authenticate()
+          },
         ),
       ),
     );

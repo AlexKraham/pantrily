@@ -8,10 +8,51 @@ import 'categories.dart';
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final defaultSize = SizeConfig.defaultSize;
     return SafeArea(
       child: Column(
         children: [
           Categories(),
+          GestureDetector(
+            onTap: () {
+              print("Adding new category");
+            },
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(defaultSize * 2),
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(vertical: defaultSize * 1),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFe6a44e),
+                        borderRadius: BorderRadius.circular(defaultSize * 1.2),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            "assets/icons/add.svg",
+                            width: 18,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: defaultSize * 1.5),
+                          Text(
+                            "Create New Category",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: defaultSize * 1.7),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(

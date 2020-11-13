@@ -27,7 +27,7 @@ class ProfileMenuItem extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 iconSrc,
-                height: defaultSize * 2.2,
+                height: 22,
                 color: title == "Premium Account"
                     ? kPrimaryColor
                     : kTextLightColor,

@@ -48,7 +48,8 @@ class ProfileBody extends StatelessWidget {
             title: "Logout",
             press: () async {
               print("logging out");
-              Navigator.pop(context);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/authenticate', (Route<dynamic> route) => false);
               await _auth.signOut();
             },
           ),

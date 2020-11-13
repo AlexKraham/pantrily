@@ -26,9 +26,9 @@ class _RegisterState extends State<Register> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.green[300],
+            backgroundColor: kPrimaryColor,
             appBar: AppBar(
-              backgroundColor: Colors.green[500],
+              backgroundColor: kPrimaryColor,
               elevation: 0.0,
               title: Text("Sign up to Pantrily!"),
               actions: [
