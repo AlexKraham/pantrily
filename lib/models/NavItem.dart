@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pantrily/screens/home/home_screen.dart';
+import 'package:pantrily/screens/profile/profile_screen.dart';
 
 class NavItem {
   final int id;
@@ -10,14 +11,21 @@ class NavItem {
 
   // if there is no destination
   bool destinationChecker() {
-    if (destination != null) return false;
-    return true;
+    if (destination != null) return true;
+    return false;
   }
 }
 
 // if we make changes here the provider package will rebuild the widgets and use this nav tiems
 class NavItems extends ChangeNotifier {
   int selectedIndex = 0;
+
+  void changeNavIndex({int index}) {
+    selectedIndex = index;
+    // notify widgets that use this value so that it can rebuild.
+    notifyListeners();
+  }
+
   List<NavItem> items = [
     NavItem(
       id: 1,
@@ -39,6 +47,7 @@ class NavItems extends ChangeNotifier {
     NavItem(
       id: 5,
       icon: "assets/icons/user.svg",
+      destination: ProfileScreen(),
     ),
   ];
 }

@@ -34,7 +34,17 @@ class BottomNavBar extends StatelessWidget {
               (index) => buildIconNavItem(
                 isActive: navItems.selectedIndex == index ? true : false,
                 icon: navItems.items[index].icon,
-                press: () {},
+                press: () {
+                  navItems.changeNavIndex(index: index);
+                  // if there is a destination, add that page and show to user
+                  if (navItems.items[index].destinationChecker())
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => navItems.items[index].destination,
+                      ),
+                    );
+                },
               ),
             ),
           ),
