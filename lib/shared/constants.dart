@@ -13,7 +13,7 @@ const textInputDecoration = InputDecoration(
 
 const kPrimaryColor = Color(0xFFE18B23);
 const kTextColor = Color(0xFF202E2E);
-const kTextLigntColor = Color(0xFF7286A5);
+const kTextLightColor = Color(0xFF7286A5);
 const kSelectedBoxColor = Color(0xFFEFF3EE);
 const kBoxColor = Colors.transparent;
 const kGreyColor = Color(0xFFC2C285);

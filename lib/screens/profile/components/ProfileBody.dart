@@ -1,107 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pantrily/screens/profile/components/ProfileMenuItem.dart';
+import 'package:pantrily/screens/profile/components/info.dart';
+import 'package:pantrily/services/auth.dart';
 import 'package:pantrily/shared/constants.dart';
 import 'package:pantrily/shared/size_config.dart';
 
 class ProfileBody extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Info(
-          name: "Alexander Phan",
-          image: "assets/images/anonymous-user.png",
-          email: "alexander.phan@me.com",
-        ),
-      ],
-    );
-  }
-}
-
-class Info extends StatelessWidget {
-  const Info({
-    Key key,
-    this.name,
-    this.email,
-    this.image,
-  }) : super(key: key);
-
-  final String name, email, image;
-
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     double defaultSize = SizeConfig.defaultSize;
-    return SizedBox(
-      height: defaultSize * 25,
-      child: Stack(
+    return SingleChildScrollView(
+      child: Column(
         children: [
-          ClipPath(
-            clipper: CustomShape(),
-            child: Container(
-              height: defaultSize * 15,
-              color: kPrimaryColor,
-            ),
+          Info(
+            name: "Alexander Phan",
+            image: "assets/images/anonymous-user.png",
+            email: "alexander.phan@me.com",
           ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: defaultSize),
-                  height: defaultSize * 14,
-                  width: defaultSize * 14,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.white,
-                      width: defaultSize * .80,
-                    ),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage(image),
-                    ),
-                  ),
-                ),
-                Text(
-                  name,
-                  style: TextStyle(
-                    fontSize: defaultSize * 2.3,
-                    color: kTextColor,
-                  ),
-                ),
-                SizedBox(
-                  height: defaultSize * .5,
-                ),
-                Text(
-                  email,
-                  style: TextStyle(
-                    fontSize: defaultSize * 1.3,
-                    color: Color(0xFF8492A2),
-                  ),
-                ),
-              ],
-            ),
-          )
+          SizedBox(
+            height: defaultSize * 2,
+          ),
+          ProfileMenuItem(
+            iconSrc: "assets/icons/bookmark_fill.svg",
+            title: "Saved Recipes",
+            press: () {
+              print("pressed saved recipes");
+            },
+          ),
+          ProfileMenuItem(
+            iconSrc: "assets/icons/chef_color.svg",
+            title: "Premium Account",
+            press: () {
+              print("pressed premium");
+            },
+          ),
+          ProfileMenuItem(
+            iconSrc: "assets/icons/info.svg",
+            title: "Help",
+            press: () {
+              print("pressed help button");
+            },
+          ),
+          ProfileMenuItem(
+            iconSrc: "assets/icons/logout.svg",
+            title: "Logout",
+            press: () async {
+              print("logging out");
+              Navigator.pop(context);
+              await _auth.signOut();
+            },
+          ),
         ],
       ),
     );
-  }
-}
-
-class CustomShape extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    double height = size.height;
-    double width = size.width;
-    path.lineTo(0, height - 100);
-    path.quadraticBezierTo(width / 2, height, width, height - 100);
-    path.lineTo(width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
   }
 }

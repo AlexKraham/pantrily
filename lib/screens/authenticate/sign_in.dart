@@ -80,7 +80,7 @@ class _SignInState extends State<SignIn> {
                           });
 
                           dynamic result = await _auth
-                              .registerWithEmailAndPassword(email, password);
+                              .signInWithEmailAndPassword(email, password);
                           if (result == null) {
                             setState(() {
                               error = "Invalid email or password.";
