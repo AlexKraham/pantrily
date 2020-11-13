@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pantrily/models/user.dart';
 import 'package:pantrily/screens/authenticate/authenticate.dart';
 import 'package:pantrily/screens/home/home.dart';
+import 'package:pantrily/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
@@ -13,7 +14,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return Home();
+      return HomeScreen();
     }
   }
 }

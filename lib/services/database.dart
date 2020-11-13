@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pantrily/models/brew.dart';
-import 'package:pantrily/models/pantry.dart';
 import 'package:pantrily/models/user.dart';
 
 class DatabaseService {

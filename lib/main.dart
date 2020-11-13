@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 
 import 'package:pantrily/models/user.dart';
 
+import 'models/NavItem.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -18,8 +20,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<AppUser>.value(
       value: AuthService().user,
-      child: MaterialApp(
-        home: Wrapper(),
+      child: ChangeNotifierProvider(
+        create: (context) => NavItems(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: "Pantrily",
+          theme: ThemeData(
+            backgroundColor: Colors.white,
+            appBarTheme: AppBarTheme(
+              color: Colors.white,
+              elevation: 0,
+            ),
+            scaffoldBackgroundColor: Colors.white,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: Wrapper(),
+        ),
       ),
     );
   }
