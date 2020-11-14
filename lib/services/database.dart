@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:pantrily/models/SubCategory.dart';
 import 'package:pantrily/models/brew.dart';
 import 'package:pantrily/models/user.dart';
@@ -13,6 +14,12 @@ class DatabaseService {
 
   final CollectionReference subCategoryCollection =
       FirebaseFirestore.instance.collection('subcategories');
+
+  final CollectionReference pantryCollection =
+      FirebaseFirestore.instance.collection("pantries");
+
+  final CollectionReference pantryItemCollection =
+      FirebaseFirestore.instance.collection("pantryitems");
 
   Future<void> updateUserData(
       {String name, String email, String imgSrc}) async {
@@ -34,16 +41,26 @@ class DatabaseService {
     });
   }
 
-  // brew list from snapshot
-  // List<Brew> _brewListFromSnapshot(QuerySnapshot snapshot) {
-  //   return snapshot.docs.map((doc) {
-  //     //print(doc.data);
-  //     return Brew(
-  //         name: doc.data()['name'] ?? '',
-  //         strength: doc.data()['strength'] ?? 0,
-  //         sugars: doc.data()['sugars'] ?? '0');
-  //   }).toList();
-  // }
+  // add pantry into
+  Future<void> addPantryItem({
+    String foodId,
+    String label,
+    String imgSrc,
+    String category,
+    String area,
+    int count,
+  }) async {
+    return pantryCollection.doc(uid).collection('pantryItems').add({
+      'foodId': foodId,
+      'label': label,
+      'imgSrc': imgSrc,
+      'category': category,
+      'area': area,
+      'count': count,
+      'date': DateTime.now(),
+    });
+  }
+
   List<SubCategory> _subCategoryListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return SubCategory(
@@ -70,11 +87,6 @@ class DatabaseService {
         .snapshots()
         .map(_subCategoryListFromSnapshot);
   }
-
-  // get brews stream
-  // Stream<List<Brew>> get brews {
-  //   return userCollection.snapshots().map(_brewListFromSnapshot);
-  // }
 
   // get user doc stream
   Stream<UserData> get userData {

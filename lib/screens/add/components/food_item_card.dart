@@ -1,15 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:pantrily/models/FoodItem.dart';
+import 'package:pantrily/models/user.dart';
+import 'package:pantrily/screens/add/components/add_item_form.dart';
+import 'package:pantrily/services/database.dart';
 import 'package:pantrily/shared/constants.dart';
 import 'package:pantrily/shared/size_config.dart';
+import 'package:provider/provider.dart';
 
 class FoodItemCard extends StatelessWidget {
   const FoodItemCard({Key key, this.foodItem}) : super(key: key);
 
   final FoodItem foodItem;
+  // final Function addItem;
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AppUser>(context);
+
+    void addItem() {
+      DatabaseService(uid: user.uid).addPantryItem(
+        foodId: foodItem.foodId,
+        label: foodItem.label,
+        imgSrc: foodItem.imgSrc,
+        category: foodItem.category,
+        area: "Fridge",
+        count: 1,
+      );
+    }
+
+    void _showAddItemForm() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+              child: AddItemForm(foodItem: foodItem),
+            );
+          });
+    }
+
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.all(8.0),
@@ -56,7 +85,7 @@ class FoodItemCard extends StatelessWidget {
                   ],
                 ),
               ),
-              IconButton(icon: Icon(Icons.add), onPressed: () {})
+              IconButton(icon: Icon(Icons.add), onPressed: _showAddItemForm)
             ],
           ),
         ),

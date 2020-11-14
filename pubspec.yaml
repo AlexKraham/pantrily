@@ -36,6 +36,7 @@ dependencies:
   provider: ^4.3.2+2
   flutter_spinkit: ^4.1.2+1
   http: ^0.12.2
+  basic_utils: ^2.6.3
 
 
 dev_dependencies:

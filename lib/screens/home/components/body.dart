@@ -33,7 +33,6 @@ class Body extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
-            TestApi(),
             Categories(),
             Expanded(
               child: Padding(
