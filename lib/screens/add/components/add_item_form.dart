@@ -30,8 +30,19 @@ class _AddItemForm extends State<AddItemForm> {
   String _currentImgSrc;
   String _currentArea;
   int _currentCount;
+  String _currentCategory;
 
   final List<String> areas = ["Pantry", "Fridge", "Freezer"];
+  final List<String> categories = [
+    "Fruit and Vegetables",
+    "Meat and Seafood",
+    "Dairy",
+    "Snacks",
+    "Dry Items",
+    "Spices",
+    "Condiments",
+    "Other"
+  ];
 
   // when we don't need a provider, we can use a stream builder if we only care to have it in once class
 
@@ -50,11 +61,11 @@ class _AddItemForm extends State<AddItemForm> {
         foodId: foodItem.foodId,
         label: foodItem.label,
         imgSrc: foodItem.imgSrc,
-        category: foodItem.category,
+        category: _currentCategory,
         area: _currentArea,
         count: _currentCount,
       );
-      // Navigator.pop(context);
+      Navigator.pop(context);
     }
 
     return StreamBuilder<UserData>(
@@ -125,6 +136,19 @@ class _AddItemForm extends State<AddItemForm> {
                           }).toList(),
                           onChanged: (val) =>
                               setState(() => _currentArea = val),
+                        ),
+                        DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            labelText: "Select Category",
+                          ),
+                          items: categories.map((category) {
+                            return DropdownMenuItem(
+                              value: category,
+                              child: Text('$category'),
+                            );
+                          }).toList(),
+                          onChanged: (val) =>
+                              setState(() => _currentCategory = val),
                         ),
                         SizedBox(height: 20),
                         TextFormField(

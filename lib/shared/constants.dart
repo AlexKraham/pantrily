@@ -21,3 +21,6 @@ const kInactiveColor = Color(0xFFD1D4D4);
 
 const kApiKey = "f0236452ad45c485f5965afe1fb9422c";
 const kAppId = "d478fea1";
+
+const kAnonImgSrc =
+    "https://drive.google.com/uc?id=1FXtI6_dvW_YjtRjN9B7qq3yNkweqMwfH";

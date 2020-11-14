@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pantrily/models/PantryItem.dart';
+import 'package:pantrily/models/user.dart';
 import 'package:pantrily/screens/home/components/body.dart';
 import 'package:pantrily/screens/home/components/subcategory_form.dart';
 import 'package:pantrily/services/auth.dart';
@@ -15,6 +17,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
+    final user = Provider.of<AppUser>(context);
+    final DatabaseService db = DatabaseService(uid: user.uid);
+
+    print("user in home screen");
+    print(user.uid);
+
     void _showSettingsPanel() {
       showModalBottomSheet(
           context: context,
@@ -26,8 +34,8 @@ class HomeScreen extends StatelessWidget {
           });
     }
 
-    return StreamProvider.value(
-      value: DatabaseService().userData,
+    return StreamProvider<List<PantryItem>>.value(
+      value: DatabaseService(uid: user.uid).streamPantryItems(),
       child: Scaffold(
         appBar: buildAppBar(),
         body: Body(),

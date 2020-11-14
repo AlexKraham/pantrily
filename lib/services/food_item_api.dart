@@ -1,3 +1,4 @@
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:pantrily/models/FoodItem.dart';
@@ -27,7 +28,7 @@ class FoodItemApi {
       resultsArray.forEach((element) {
         var food = element['food'];
         foodItems.add(FoodItem(
-            label: food['label'],
+            label: StringUtils.capitalize(food['label'], allWords: true),
             foodId: food['foodId'],
             imgSrc: food['image'],
             category: food['category']));

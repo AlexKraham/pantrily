@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pantrily/models/PantryItem.dart';
 import 'package:pantrily/screens/add/add_screen.dart';
 import 'package:pantrily/screens/authenticate/authenticate.dart';
 import 'package:pantrily/screens/profile/profile_screen.dart';
@@ -21,8 +23,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<AppUser>.value(
-      value: AuthService().user,
+    return MultiProvider(
+      providers: [
+        StreamProvider<AppUser>.value(
+          value: AuthService().user,
+        ),
+      ],
       child: ChangeNotifierProvider(
         create: (context) => NavItems(),
         child: MaterialApp(
