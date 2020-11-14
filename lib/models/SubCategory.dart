@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SubCategory {
-  final int id, numItems;
+  final int numItems;
+  final String id;
   final String title, description, imageSrc;
   final Color color;
 
@@ -17,7 +18,7 @@ class SubCategory {
 // demo of sub categories
 List<SubCategory> subCategories = [
   SubCategory(
-    id: 1,
+    id: "1",
     numItems: 5,
     title: "Fruits and Vegetables",
     description: "All your fruits and vegetables in your pantry",
@@ -25,7 +26,7 @@ List<SubCategory> subCategories = [
     color: Color(0xFFD82D40),
   ),
   SubCategory(
-    id: 2,
+    id: "2",
     numItems: 3,
     title: "Meats and Seafood",
     description: "Your average poultry, seafood, red meats, etc...",
@@ -33,7 +34,7 @@ List<SubCategory> subCategories = [
     color: Color(0xFF90AF17),
   ),
   SubCategory(
-    id: 3,
+    id: "3",
     numItems: 9,
     title: "Dairy",
     description: "Cheese, milk, eggs and other dairy products",
@@ -41,7 +42,7 @@ List<SubCategory> subCategories = [
     color: Color(0xFF2DBBD8),
   ),
   SubCategory(
-    id: 4,
+    id: "4",
     numItems: 3,
     title: "Spices",
     description: "a lithany of spices and such",

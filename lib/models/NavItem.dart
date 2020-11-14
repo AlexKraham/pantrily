@@ -5,7 +5,7 @@ import 'package:pantrily/screens/profile/profile_screen.dart';
 class NavItem {
   final int id;
   final String icon;
-  final Widget destination;
+  final String destination;
 
   NavItem({this.id, this.icon, this.destination});
 
@@ -35,7 +35,7 @@ class NavItems extends ChangeNotifier {
     NavItem(
       id: 1,
       icon: "assets/icons/home.svg",
-      destination: HomeScreen(),
+      destination: '/home',
     ),
     NavItem(
       id: 2,
@@ -44,6 +44,7 @@ class NavItems extends ChangeNotifier {
     NavItem(
       id: 3,
       icon: "assets/icons/add.svg",
+      destination: "/add",
     ),
     NavItem(
       id: 4,
@@ -52,7 +53,7 @@ class NavItems extends ChangeNotifier {
     NavItem(
       id: 5,
       icon: "assets/icons/user.svg",
-      destination: ProfileScreen(),
+      destination: '/profile',
     ),
   ];
 }

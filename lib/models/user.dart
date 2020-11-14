@@ -7,8 +7,10 @@ class AppUser {
 class UserData {
   final String uid;
   final String name;
-  final String sugars;
-  final int strength;
+  final String imgSrc;
+  final String email;
+  // final String sugars;
+  // final int strength;
 
-  UserData({this.uid, this.name, this.sugars, this.strength});
+  UserData({this.uid, this.name, this.imgSrc, this.email});
 }

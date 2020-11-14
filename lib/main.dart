@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pantrily/screens/add/add_screen.dart';
 import 'package:pantrily/screens/authenticate/authenticate.dart';
+import 'package:pantrily/screens/profile/profile_screen.dart';
 import 'package:pantrily/screens/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pantrily/services/auth.dart';
@@ -37,7 +39,10 @@ class MyApp extends StatelessWidget {
           ),
           home: Wrapper(),
           routes: <String, WidgetBuilder>{
-            '/authenticate': (BuildContext context) => new Authenticate()
+            '/authenticate': (BuildContext context) => new Authenticate(),
+            '/profile': (BuildContext context) => new ProfileScreen(),
+            '/home': (BuildContext context) => new Wrapper(),
+            '/add': (BuildContext context) => new AddScreen(),
           },
         ),
       ),

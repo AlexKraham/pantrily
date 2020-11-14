@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pantrily/models/SubCategory.dart';
 import 'package:pantrily/models/brew.dart';
 import 'package:pantrily/models/user.dart';
 
@@ -7,26 +8,51 @@ class DatabaseService {
   DatabaseService({this.uid});
 
   // collection reference
-  final CollectionReference brewCollection =
-      FirebaseFirestore.instance.collection('brews');
+  final CollectionReference userCollection =
+      FirebaseFirestore.instance.collection('users');
 
-  Future<void> updateUserData(String sugars, String name, int strength) async {
-    return await brewCollection.doc(uid).set({
-      'sugars': sugars,
+  final CollectionReference subCategoryCollection =
+      FirebaseFirestore.instance.collection('subcategories');
+
+  Future<void> updateUserData(
+      {String name, String email, String imgSrc}) async {
+    return await userCollection.doc(uid).set({
+      'imgSrc': imgSrc,
       'name': name,
-      'strength': strength,
+      'email': email,
+    });
+  }
+
+  Future<void> createSubCategory(
+      {String title, String description, String imgSrc}) async {
+    print("Adding now");
+    return await subCategoryCollection.add({
+      'uid': uid,
+      'title': title,
+      'description': description,
+      'imgSrc': imgSrc,
     });
   }
 
   // brew list from snapshot
-  List<Brew> _brewListFromSnapshot(QuerySnapshot snapshot) {
+  // List<Brew> _brewListFromSnapshot(QuerySnapshot snapshot) {
+  //   return snapshot.docs.map((doc) {
+  //     //print(doc.data);
+  //     return Brew(
+  //         name: doc.data()['name'] ?? '',
+  //         strength: doc.data()['strength'] ?? 0,
+  //         sugars: doc.data()['sugars'] ?? '0');
+  //   }).toList();
+  // }
+  List<SubCategory> _subCategoryListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-      //print(doc.data);
-      return Brew(
-          name: doc.data()['name'] ?? '',
-          strength: doc.data()['strength'] ?? 0,
-          sugars: doc.data()['sugars'] ?? '0');
-    }).toList();
+      return SubCategory(
+        id: "1",
+        title: doc.data()['title'] ?? '',
+        description: doc.data()['description'] ?? '',
+        imageSrc: doc.data()['imgSrc'] ?? '',
+      );
+    });
   }
 
   // userData from snapshot
@@ -34,17 +60,24 @@ class DatabaseService {
     return UserData(
         uid: uid,
         name: snapshot.data()['name'],
-        sugars: snapshot.data()['sugars'],
-        strength: snapshot.data()['strength']);
+        email: snapshot.data()['email'],
+        imgSrc: snapshot.data()['imgSrc']);
+  }
+
+  Stream<List<SubCategory>> get subcategories {
+    return subCategoryCollection
+        .where('uid', isEqualTo: uid)
+        .snapshots()
+        .map(_subCategoryListFromSnapshot);
   }
 
   // get brews stream
-  Stream<List<Brew>> get brews {
-    return brewCollection.snapshots().map(_brewListFromSnapshot);
-  }
+  // Stream<List<Brew>> get brews {
+  //   return userCollection.snapshots().map(_brewListFromSnapshot);
+  // }
 
   // get user doc stream
   Stream<UserData> get userData {
-    return brewCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
+    return userCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
   }
 }

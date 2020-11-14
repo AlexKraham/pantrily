@@ -35,19 +35,21 @@ class BottomNavBar extends StatelessWidget {
                 isActive: navItems.selectedIndex == index ? true : false,
                 icon: navItems.items[index].icon,
                 press: () {
-                  if (navItems.checkSameIndex(index: index)) {
-                    print("same index, shouldn't push a new screen");
-                    return;
-                  }
+                  // if (navItems.checkSameIndex(index: index)) {
+                  //   print("same index, shouldn't push a new screen");
+                  //   return;
+                  // }
                   navItems.changeNavIndex(index: index);
                   // if there is a destination, add that page and show to user
                   if (navItems.items[index].destinationChecker())
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => navItems.items[index].destination,
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => navItems.items[index].destination,
+                    //   ),
+                    // );
+                    Navigator.pushNamed(
+                        context, navItems.items[index].destination);
                 },
               ),
             ),

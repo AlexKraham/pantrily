@@ -3,17 +3,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pantrily/shared/size_config.dart';
 
 class AddNewCategory extends StatelessWidget {
+  final Function press;
+
   const AddNewCategory({
     Key key,
+    this.press,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final defaultSize = SizeConfig.defaultSize;
     return GestureDetector(
-      onTap: () {
-        print("Adding new category");
-      },
+      onTap: press,
       child: Column(
         children: [
           Expanded(

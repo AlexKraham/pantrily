@@ -18,3 +18,6 @@ const kSelectedBoxColor = Color(0xFFEFF3EE);
 const kBoxColor = Colors.transparent;
 const kGreyColor = Color(0xFFC2C285);
 const kInactiveColor = Color(0xFFD1D4D4);
+
+const kApiKey = "f0236452ad45c485f5965afe1fb9422c";
+const kAppId = "d478fea1";
