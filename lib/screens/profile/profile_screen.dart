@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pantrily/screens/profile/components/ProfileBody.dart';
+import 'package:pantrily/shared/components/bottom_nav_bar.dart';
 import 'package:pantrily/shared/constants.dart';
 import 'package:pantrily/shared/size_config.dart';
 
@@ -10,6 +11,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(),
       body: ProfileBody(),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 

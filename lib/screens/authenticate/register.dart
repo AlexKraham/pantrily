@@ -76,7 +76,9 @@ class _RegisterState extends State<Register> {
                     RaisedButton(
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
-                          loading = true;
+                          setState(() {
+                            loading = true;
+                          });
                           dynamic result = await _auth
                               .registerWithEmailAndPassword(email, password);
                           if (result == null) {
@@ -84,7 +86,12 @@ class _RegisterState extends State<Register> {
                               error = "There is some error";
                               loading = false;
                             });
+                            return;
                           }
+                          setState(() {
+                            loading = false;
+                          });
+                          Navigator.pushReplacementNamed(context, "/home");
                         }
                       },
                       color: Colors.pink[500],

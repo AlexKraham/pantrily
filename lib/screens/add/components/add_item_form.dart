@@ -65,6 +65,9 @@ class _AddItemForm extends State<AddItemForm> {
         area: _currentArea,
         count: _currentCount,
       );
+      setState(() {
+        loading = false;
+      });
       Navigator.pop(context);
     }
 
@@ -76,112 +79,106 @@ class _AddItemForm extends State<AddItemForm> {
             UserData userData = snapshot.data;
             return Form(
               key: _formKey,
-              child: loading
-                  ? Loading()
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Text(
-                          "Adding Item To Pantry",
-                          style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 20.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: 75,
-                              height: 75,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(foodItem.imgSrc ??
-                                      "https://drive.google.com/uc?id=1FXtI6_dvW_YjtRjN9B7qq3yNkweqMwfH"),
-                                ),
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  StringUtils.capitalize(foodItem.label ?? ""),
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                  textAlign: TextAlign.end,
-                                ),
-                                Text(
-                                  foodItem.category ?? "",
-                                  textAlign: TextAlign.end,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 30.0),
-                        DropdownButtonFormField(
-                          decoration: InputDecoration(
-                            labelText: "Select Area",
-                          ),
-                          items: areas.map((area) {
-                            return DropdownMenuItem(
-                              value: area,
-                              child: Text('$area'),
-                            );
-                          }).toList(),
-                          onChanged: (val) =>
-                              setState(() => _currentArea = val),
-                        ),
-                        DropdownButtonFormField(
-                          decoration: InputDecoration(
-                            labelText: "Select Category",
-                          ),
-                          items: categories.map((category) {
-                            return DropdownMenuItem(
-                              value: category,
-                              child: Text('$category'),
-                            );
-                          }).toList(),
-                          onChanged: (val) =>
-                              setState(() => _currentCategory = val),
-                        ),
-                        SizedBox(height: 20),
-                        TextFormField(
-                            decoration: InputDecoration(
-                              labelText: "Select Amount",
-                              labelStyle: TextStyle(
-                                color: kPrimaryColor,
-                              ),
-                              hoverColor: kPrimaryColor,
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: kPrimaryColor),
-                              ),
-                              focusColor: kPrimaryColor,
-                            ),
-                            keyboardType: TextInputType.number,
-                            onChanged: (val) =>
-                                setState(() => _currentCount = int.parse(val))),
-                        SizedBox(height: 10.0),
-                        FlatButton(
-                            color: kPrimaryColor,
-                            child: Text(
-                              'Add Item To Pantry',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: defaultSize * 1.7),
-                            ),
-                            onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                addItem();
-                              }
-                            }),
-                      ],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Text(
+                    "Adding Item To Pantry",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
                     ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 20.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 75,
+                        height: 75,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(foodItem.imgSrc ??
+                                "https://drive.google.com/uc?id=1FXtI6_dvW_YjtRjN9B7qq3yNkweqMwfH"),
+                          ),
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            StringUtils.capitalize(foodItem.label ?? ""),
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                            textAlign: TextAlign.end,
+                          ),
+                          Text(
+                            foodItem.category ?? "",
+                            textAlign: TextAlign.end,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 30.0),
+                  DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      labelText: "Select Area",
+                    ),
+                    items: areas.map((area) {
+                      return DropdownMenuItem(
+                        value: area,
+                        child: Text('$area'),
+                      );
+                    }).toList(),
+                    onChanged: (val) => setState(() => _currentArea = val),
+                  ),
+                  DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      labelText: "Select Category",
+                    ),
+                    items: categories.map((category) {
+                      return DropdownMenuItem(
+                        value: category,
+                        child: Text('$category'),
+                      );
+                    }).toList(),
+                    onChanged: (val) => setState(() => _currentCategory = val),
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "Select Amount",
+                        labelStyle: TextStyle(
+                          color: kPrimaryColor,
+                        ),
+                        hoverColor: kPrimaryColor,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: kPrimaryColor),
+                        ),
+                        focusColor: kPrimaryColor,
+                      ),
+                      keyboardType: TextInputType.number,
+                      onChanged: (val) =>
+                          setState(() => _currentCount = int.parse(val))),
+                  SizedBox(height: 10.0),
+                  FlatButton(
+                      color: kPrimaryColor,
+                      child: Text(
+                        'Add Item To Pantry',
+                        style: TextStyle(
+                            color: Colors.white, fontSize: defaultSize * 1.7),
+                      ),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          addItem();
+                        }
+                      }),
+                ],
+              ),
             );
           } else {
             return Loading();

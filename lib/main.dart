@@ -4,6 +4,7 @@ import 'package:pantrily/models/PantryItem.dart';
 import 'package:pantrily/screens/add/add_screen.dart';
 import 'package:pantrily/screens/authenticate/authenticate.dart';
 import 'package:pantrily/screens/profile/profile_screen.dart';
+import 'package:pantrily/screens/recipes/components/add_recipe_form.dart';
 import 'package:pantrily/screens/recipes/recipe_screen.dart';
 import 'package:pantrily/screens/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,12 +25,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        StreamProvider<AppUser>.value(
-          value: AuthService().user,
-        ),
-      ],
+    return StreamProvider<AppUser>.value(
+      value: AuthService().user,
       child: ChangeNotifierProvider(
         create: (context) => NavItems(),
         child: MaterialApp(
@@ -51,6 +48,7 @@ class MyApp extends StatelessWidget {
             '/home': (BuildContext context) => new Wrapper(),
             '/add': (BuildContext context) => new AddScreen(),
             '/recipes': (BuildContext context) => new RecipeScreen(),
+            '/addrecipe': (BuildContext context) => new AddRecipeForm(),
           },
         ),
       ),

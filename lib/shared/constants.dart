@@ -11,6 +11,11 @@ const textInputDecoration = InputDecoration(
   ),
 );
 
+const kRecipeTextStyle = TextStyle(
+  fontSize: 22,
+  fontWeight: FontWeight.w500,
+);
+
 const kPrimaryColor = Color(0xFFE18B23);
 const kTextColor = Color(0xFF202E2E);
 const kTextLightColor = Color(0xFF7286A5);
@@ -24,3 +29,5 @@ const kAppId = "d478fea1";
 
 const kAnonImgSrc =
     "https://drive.google.com/uc?id=1FXtI6_dvW_YjtRjN9B7qq3yNkweqMwfH";
+const kAnonRecipeImgSrc =
+    "https://drive.google.com/uc?id=1iCQ_adqbhuSCW0Bw-Pu83vu3d6ssywWA";

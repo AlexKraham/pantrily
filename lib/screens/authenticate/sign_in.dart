@@ -87,6 +87,10 @@ class _SignInState extends State<SignIn> {
                               loading = false;
                             });
                           }
+                          setState(() {
+                            loading = false;
+                          });
+                          Navigator.pushReplacementNamed(context, "/home");
                         }
                       },
                       color: Colors.pink[500],
