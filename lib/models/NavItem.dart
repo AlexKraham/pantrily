@@ -49,6 +49,7 @@ class NavItems extends ChangeNotifier {
     NavItem(
       id: 4,
       icon: "assets/icons/chef_nav.svg",
+      destination: "/recipes",
     ),
     NavItem(
       id: 5,

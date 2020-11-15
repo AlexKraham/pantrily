@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pantrily/screens/add/components/add_body.dart';
+import 'package:pantrily/shared/components/bottom_nav_bar.dart';
 import 'package:pantrily/shared/constants.dart';
 
 class AddScreen extends StatelessWidget {
@@ -12,6 +13,7 @@ class AddScreen extends StatelessWidget {
         title: Text("Add To Pantry"),
       ),
       body: AddBody(),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }

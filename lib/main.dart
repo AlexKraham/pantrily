@@ -4,6 +4,7 @@ import 'package:pantrily/models/PantryItem.dart';
 import 'package:pantrily/screens/add/add_screen.dart';
 import 'package:pantrily/screens/authenticate/authenticate.dart';
 import 'package:pantrily/screens/profile/profile_screen.dart';
+import 'package:pantrily/screens/recipes/recipe_screen.dart';
 import 'package:pantrily/screens/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pantrily/services/auth.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
             '/profile': (BuildContext context) => new ProfileScreen(),
             '/home': (BuildContext context) => new Wrapper(),
             '/add': (BuildContext context) => new AddScreen(),
+            '/recipes': (BuildContext context) => new RecipeScreen(),
           },
         ),
       ),

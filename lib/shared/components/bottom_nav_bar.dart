@@ -13,6 +13,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double defaultSize = SizeConfig.defaultSize;
+    print("Buidling");
     return Consumer<NavItems>(
       builder: (context, navItems, child) => Container(
         padding: EdgeInsets.symmetric(
@@ -48,7 +49,9 @@ class BottomNavBar extends StatelessWidget {
                     //     builder: (context) => navItems.items[index].destination,
                     //   ),
                     // );
-                    Navigator.pushNamed(
+                    // print("pushing to: " + navItems.items[index].destination);
+
+                    Navigator.pushReplacementNamed(
                         context, navItems.items[index].destination);
                 },
               ),
