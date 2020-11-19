@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:pantrily/models/Recipe.dart';
+import 'package:pantrily/models/RecipeBuilder.dart';
 import 'package:pantrily/shared/constants.dart';
 import 'package:pantrily/shared/size_config.dart';
+import 'package:provider/provider.dart';
 
 class RecipeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // RecipeBuilder recipeBuilder = Provider.of<RecipeBuilder>(context);
+    // print(recipeBuilder);
+
     TextEditingController _searchController = TextEditingController();
     final defaultSize = SizeConfig.defaultSize;
     return Padding(

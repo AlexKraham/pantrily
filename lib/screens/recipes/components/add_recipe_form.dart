@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pantrily/models/RecipeBuilder.dart';
 import 'package:pantrily/models/user.dart';
+import 'package:pantrily/screens/recipes/components/add_ingredient_form.dart';
 import 'package:pantrily/shared/components/bottom_nav_bar.dart';
 import 'package:pantrily/shared/constants.dart';
 import 'package:pantrily/shared/size_config.dart';
@@ -17,9 +19,25 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<AppUser>(context);
+    // RecipeBuilder recipeBuilder = Provider.of<RecipeBuilder>(context);
+    // print("Building add recipe form");
+    // print(recipeBuilder);
     final defaultSize = SizeConfig.defaultSize;
     bool loading = false;
     bool success = false;
+
+    // RecipeBuilder builder = RecipeBuilder();
+
+    void _showAddIngredientForm() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+              child: AddIngredientForm(),
+            );
+          });
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +63,11 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
                   ),
                   focusColor: kPrimaryColor,
                 ),
-                onChanged: (val) => setState(() => _currentTitle = val),
+                onChanged: (val) => setState(() {
+                  _currentTitle = val;
+                  // builder.setTitle(val);
+                  // print(builder.recipe.title);
+                }),
               ),
               SizedBox(
                 height: 20,
@@ -57,6 +79,43 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
                     "Ingredients:",
                     style: kRecipeTextStyle,
                     textAlign: TextAlign.start,
+                  ),
+                  Card(
+                    color: Colors.grey[50],
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Container(
+                            width: 50.0,
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: new DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(null ??
+                                    "https://drive.google.com/uc?id=1FXtI6_dvW_YjtRjN9B7qq3yNkweqMwfH"),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Text("Ingredient number 1"),
+                            Text("Amount")
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            IconButton(
+                                icon: Icon(Icons.edit), onPressed: () {}),
+                            IconButton(
+                                icon: Icon(Icons.delete), onPressed: () {}),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   Text(
                     "Ingredient 1",
@@ -84,9 +143,10 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
                         ),
                       ),
                       onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          // addItem();
-                        }
+                        // if (_formKey.currentState.validate()) {
+                        //   // addItem();
+                        // }
+                        _showAddIngredientForm();
                       },
                     ),
                   ),
@@ -118,9 +178,9 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
                         ),
                       ),
                       onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          // addItem();
-                        }
+                        // if (_formKey.currentState.validate()) {
+                        //   _show
+                        // }
                       },
                     ),
                   ),

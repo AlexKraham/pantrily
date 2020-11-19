@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:pantrily/models/PantryItem.dart';
 
 class Recipe {
-  final String title;
-  final String description;
-  final String imgSrc;
-  final List<String> ingredients; // this will be id's of each ingredient
-  final List<String> directions;
-  final String id;
-  final String uid;
+  String title;
+  String description;
+  String imgSrc;
+  List<String> ingredients; // this will be id's of each ingredient
+  List<String> directions;
+  String id;
+  String uid;
 
   Recipe(
       {this.title,
