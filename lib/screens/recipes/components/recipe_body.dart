@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pantrily/models/PantryItem.dart';
 import 'package:pantrily/models/Recipe.dart';
 import 'package:pantrily/models/RecipeBuilder.dart';
+import 'package:pantrily/models/RecipeMatch.dart';
 import 'package:pantrily/shared/constants.dart';
 import 'package:pantrily/shared/size_config.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +13,67 @@ class RecipeBody extends StatelessWidget {
     // RecipeBuilder recipeBuilder = Provider.of<RecipeBuilder>(context);
     // print(recipeBuilder);
     var recipes = Provider.of<List<Recipe>>(context) ?? [];
+    var pantryItems = Provider.of<List<PantryItem>>(context) ?? [];
+    print("recipe length: " + recipes.length.toString());
+
+    Map pantryMap = {};
+    var recipeMatches = [];
+
+    void getRecipeMatches() {
+      for (var item in pantryItems) {
+        if (pantryMap.containsKey(item.foodId)) {
+          pantryMap[item.foodId] += item.count;
+        } else {
+          pantryMap[item.foodId] = item.count;
+        }
+      }
+
+      // print(pantryMap);
+      for (var recipe in recipes) {
+        print("inside mather, recipe: " + recipe.title);
+        int numIngredients = 0;
+        int matchedIngredients = 0;
+        for (var ingredient in recipe.ingredients) {
+          numIngredients += ingredient.count;
+          var count = pantryMap[ingredient.foodItem.foodId] ?? 0;
+          if (count > ingredient.count) count = ingredient.count;
+          matchedIngredients += count;
+        }
+        RecipeMatch recipeMatch = RecipeMatch(
+            recipe: recipe,
+            numIngredients: numIngredients,
+            matchedIngredients: matchedIngredients);
+        recipeMatches.add(recipeMatch);
+      }
+
+      print("recipe matches length: " + recipeMatches.length.toString());
+      recipeMatches.sort((a, b) {
+        // print("RECIPE:" + a.recipe.title);
+        //         // print("A: " + (a.matchedIngredients / a.numIngredients).toString());
+        //         // print("B: " +
+        //         //     b.recipe.title +
+        //         //     (b.matchedIngredients / b.numIngredients).toString());
+        //         int compare = (a.matchedIngredients / a.numIngredients)
+        //             .compareTo((b.matchedIngredients / b.matchedIngredients));
+        //         // if (compare == 0) {
+        //         //   return a.recipe.title.compareTo(b.recipe.title);
+        //         // } else {
+        //         //   return compare;
+        //         // }
+        // double compare = (a.matchedIngredients / a.numIngredients) < (b.matchedIngredients / b.matchedIngredients);
+        return (a.matchedIngredients / a.numIngredients) <
+                (b.matchedIngredients / b.matchedIngredients)
+            ? 1
+            : -1;
+      });
+
+      // print("recipe matches ength again" + recipeMatches.length.toString());
+      print("recipe match");
+      print(recipeMatches[3].recipe.title);
+      print(recipeMatches[3].matchedIngredients);
+    }
+
+    getRecipeMatches();
 
     TextEditingController _searchController = TextEditingController();
     final defaultSize = SizeConfig.defaultSize;
@@ -80,9 +143,9 @@ class RecipeBody extends StatelessWidget {
                 mainAxisSpacing: 20,
                 childAspectRatio: 2.0,
                 children: List.generate(
-                    recipes.length,
+                    recipeMatches.length,
                     (i) => RecipeCard(
-                          recipe: recipes[i],
+                          recipeMatch: recipeMatches[i],
                         )),
               ),
             ),
@@ -113,10 +176,10 @@ class RecipeBody extends StatelessWidget {
 class RecipeCard extends StatelessWidget {
   const RecipeCard({
     Key key,
-    this.recipe,
+    this.recipeMatch,
   }) : super(key: key);
 
-  final Recipe recipe;
+  final RecipeMatch recipeMatch;
   @override
   Widget build(BuildContext context) {
     final defaultSize = SizeConfig.defaultSize;
@@ -145,7 +208,7 @@ class RecipeCard extends StatelessWidget {
                   children: [
                     Spacer(),
                     Text(
-                      recipe.title,
+                      recipeMatch.recipe.title,
                       style: TextStyle(
                         fontSize: defaultSize * 2.2,
                         color: Colors.white,
@@ -155,7 +218,7 @@ class RecipeCard extends StatelessWidget {
                       height: defaultSize * 0.5,
                     ),
                     Text(
-                      recipe.description,
+                      recipeMatch.recipe.description,
                       style: TextStyle(
                         color: Colors.white54,
                         fontSize: defaultSize * 1.5,
@@ -178,7 +241,10 @@ class RecipeCard extends StatelessWidget {
                           ]),
                       child: Padding(
                         padding: EdgeInsets.all(defaultSize * .5),
-                        child: Text("8/9 Pantry Match"),
+                        child: Text(recipeMatch.matchedIngredients.toString() +
+                            "/" +
+                            recipeMatch.numIngredients.toString() +
+                            " Pantry Match"),
                       ),
                     ),
 
@@ -204,7 +270,7 @@ class RecipeCard extends StatelessWidget {
             AspectRatio(
               aspectRatio: .8,
               child: Image.network(
-                recipe.imgSrc,
+                recipeMatch.recipe.imgSrc,
                 fit: BoxFit.cover,
                 // alignment: Alignment.centerLeft,
               ),

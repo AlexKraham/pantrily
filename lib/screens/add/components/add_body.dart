@@ -60,7 +60,10 @@ class _AddBodyState extends State<AddBody> {
             : Flexible(
                 child: ListView(
                   children: foodItems.map((item) {
-                    return FoodItemCard(foodItem: item);
+                    return FoodItemCard(
+                      foodItem: item,
+                      isRecipeForm: false,
+                    );
                   }).toList(),
                 ),
               )

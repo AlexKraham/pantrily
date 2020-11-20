@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pantrily/models/PantryItem.dart';
 import 'package:pantrily/models/Recipe.dart';
+import 'package:pantrily/models/RecipeMatch.dart';
 import 'package:pantrily/models/SubCategory.dart';
 import 'package:pantrily/models/brew.dart';
 import 'package:pantrily/models/user.dart';
@@ -69,6 +70,11 @@ class DatabaseService {
         (list) => list.docs.map((doc) => Recipe.fromFirestore(doc)).toList());
   }
 
+  // Future<Stream<List<RecipeMatch>>> streamRecipeMatches() async {
+  //   var recipes = await recipeCollection.where('uid', isEqualTo: uid).get();
+  //   List<Recipe> recipes.docs.map((e) => null);
+  // }
+
   Future<void> updateUserData(
       {String name, String email, String imgSrc}) async {
     return await userCollection.doc(uid).set({
@@ -124,15 +130,6 @@ class DatabaseService {
               }),
       'directions': recipe.directions,
       'uid': recipe.uid
-      // 'ingredients': recipe.ingredients.map(
-      //   (ingredient) => {
-      //     'label': ingredient.foodItem.label,
-      //     'imgSrc': ingredient.foodItem.imgSrc,
-      //     'foodId': ingredient.foodItem.foodId,
-      //     'count': ingredient.count,
-      //   },
-      // ),
-      // 'directions': recipe.directions ?? [],
     });
   }
 

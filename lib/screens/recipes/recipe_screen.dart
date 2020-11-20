@@ -16,8 +16,15 @@ class RecipeScreen extends StatelessWidget {
     final user = Provider.of<AppUser>(context);
 
     print("Building recipe screen");
-    return StreamProvider.value(
-      value: DatabaseService(uid: user.uid).streamRecipes(),
+    return MultiProvider(
+      providers: [
+        StreamProvider.value(
+          value: DatabaseService(uid: user.uid).streamRecipes(),
+        ),
+        StreamProvider.value(
+          value: DatabaseService(uid: user.uid).streamPantryItems(),
+        ),
+      ],
       child: Scaffold(
         appBar: buildAppBar(),
         body: RecipeBody(),
