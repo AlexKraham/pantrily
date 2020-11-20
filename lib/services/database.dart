@@ -46,6 +46,10 @@ class DatabaseService {
     return ref.doc(id).delete();
   }
 
+  Future<void> deleteRecipe(String id) {
+    return _db.collection("recipes").doc(id).delete();
+  }
+
   // Get a stream of a subcollection pantry items
   Stream<List<PantryItem>> streamPantryItems() {
     var ref = _db.collection("pantries").doc(uid).collection('pantryItems');

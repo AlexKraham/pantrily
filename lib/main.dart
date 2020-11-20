@@ -56,6 +56,7 @@ class MyApp extends StatelessWidget {
               '/add': (BuildContext context) => new AddScreen(),
               '/recipes': (BuildContext context) => new RecipeScreen(),
               '/addrecipe': (BuildContext context) => new AddRecipeForm(),
+              // '/recipe': (BuildContext context) => new RecipeDetailsScreen(),
             },
           ),
         ),
