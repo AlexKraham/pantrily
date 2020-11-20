@@ -106,20 +106,22 @@ class _AddItemForm extends State<AddItemForm> {
                           ),
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            StringUtils.capitalize(foodItem.label ?? ""),
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w600),
-                            textAlign: TextAlign.end,
-                          ),
-                          Text(
-                            foodItem.category ?? "",
-                            textAlign: TextAlign.end,
-                          ),
-                        ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              StringUtils.capitalize(foodItem.label ?? ""),
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w600),
+                              textAlign: TextAlign.end,
+                            ),
+                            Text(
+                              foodItem.category ?? "",
+                              textAlign: TextAlign.end,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

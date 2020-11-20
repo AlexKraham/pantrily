@@ -47,6 +47,7 @@ class _BodyState extends State<Body> {
 
     void _showSubCategoryPanel() {
       showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
             return Container(

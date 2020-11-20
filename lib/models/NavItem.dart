@@ -37,10 +37,10 @@ class NavItems extends ChangeNotifier {
       icon: "assets/icons/home.svg",
       destination: '/home',
     ),
-    NavItem(
-      id: 2,
-      icon: "assets/icons/list.svg",
-    ),
+    // NavItem(
+    //   id: 2,
+    //   icon: "assets/icons/list.svg",
+    // ),
     NavItem(
       id: 3,
       icon: "assets/icons/add.svg",

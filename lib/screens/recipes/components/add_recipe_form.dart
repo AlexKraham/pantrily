@@ -38,6 +38,7 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
 
     void _showAddIngredientForm() {
       showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
             return Container(
@@ -287,15 +288,18 @@ class IngredientCard extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            children: [
-              Text(
-                ingredient.foodItem.label,
-              ),
-              Text(
-                "Amount: " + ingredient.count.toString(),
-              ),
-            ],
+          Expanded(
+            child: Column(
+              children: [
+                Text(
+                  ingredient.foodItem.label,
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  "Amount: " + ingredient.count.toString(),
+                ),
+              ],
+            ),
           ),
           Row(
             children: [

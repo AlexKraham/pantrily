@@ -60,19 +60,22 @@ class _AddIngredientDetailsState extends State<AddIngredientDetails> {
                   ),
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    StringUtils.capitalize(widget.foodItem.label ?? ""),
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.end,
-                  ),
-                  Text(
-                    widget.foodItem.category ?? "",
-                    textAlign: TextAlign.end,
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      StringUtils.capitalize(widget.foodItem.label ?? ""),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                      textAlign: TextAlign.end,
+                    ),
+                    Text(
+                      widget.foodItem.category ?? "",
+                      textAlign: TextAlign.end,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

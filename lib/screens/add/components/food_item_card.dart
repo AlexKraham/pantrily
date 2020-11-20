@@ -33,11 +33,14 @@ class FoodItemCard extends StatelessWidget {
 
     void _showAddItemForm() {
       showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
-            return Container(
-              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-              child: AddItemForm(foodItem: foodItem),
+            return SafeArea(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+                child: AddItemForm(foodItem: foodItem),
+              ),
             );
           });
     }
@@ -45,6 +48,7 @@ class FoodItemCard extends StatelessWidget {
     void _showAddIngredientDetails() {
       Navigator.of(context).pop();
       showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
             return Container(

@@ -179,12 +179,14 @@ class IngredientCard extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            children: [
-              Text(
-                ingredient.foodItem.label,
-              ),
-            ],
+          Expanded(
+            child: Column(
+              children: [
+                Text(
+                  ingredient.foodItem.label,
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.0),

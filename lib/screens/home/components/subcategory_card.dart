@@ -48,17 +48,6 @@ class SubCategoryCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Spacer(),
-                    buildInfoRow(
-                      defaultSize,
-                      iconSrc: "assets/icons/chef.svg",
-                      text: "${subCategory.numItems} items",
-                    ),
-                    SizedBox(height: defaultSize * 0.5),
-                    buildInfoRow(
-                      defaultSize,
-                      iconSrc: "assets/icons/pot.svg",
-                      text: "${subCategory.numItems} items almost expired",
-                    ),
                   ],
                 ),
               ),

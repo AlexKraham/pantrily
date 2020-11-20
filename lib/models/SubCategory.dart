@@ -47,7 +47,7 @@ List<SubCategory> subCategories = [
     title: "Spices",
     description: "a lithany of spices and such",
     imageSrc: "assets/images/spices.png",
-    color: Color(0xFFfabf1e),
+    color: Color(0xFFd4c07f),
   ),
   SubCategory(
     id: "5",
