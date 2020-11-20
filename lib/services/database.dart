@@ -64,6 +64,16 @@ class DatabaseService {
         list.docs.map((doc) => PantryItem.fromFireStore(doc)).toList());
   }
 
+  Stream<List<PantryItem>> streamPantryItemsByCategory(String category) {
+    var ref = _db
+        .collection("pantries")
+        .doc(uid)
+        .collection("pantryItems")
+        .where("category", isEqualTo: category);
+    return ref.snapshots().map((list) =>
+        list.docs.map((doc) => PantryItem.fromFireStore(doc)).toList());
+  }
+
   Stream<List<Recipe>> streamRecipes() {
     var ref = recipeCollection.where('uid', isEqualTo: uid);
     return ref.snapshots().map(

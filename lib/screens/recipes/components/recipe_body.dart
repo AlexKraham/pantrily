@@ -67,10 +67,10 @@ class RecipeBody extends StatelessWidget {
             : -1;
       });
 
-      // print("recipe matches ength again" + recipeMatches.length.toString());
-      print("recipe match");
-      print(recipeMatches[3].recipe.title);
-      print(recipeMatches[3].matchedIngredients);
+      // // print("recipe matches ength again" + recipeMatches.length.toString());
+      // print("recipe match");
+      // print(recipeMatches[3].recipe.title);
+      // print(recipeMatches[3].matchedIngredients);
     }
 
     getRecipeMatches();
@@ -183,6 +183,19 @@ class RecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final defaultSize = SizeConfig.defaultSize;
+
+    Color matchColor = Color(0xff6db372);
+    if (recipeMatch.matchedIngredients == recipeMatch.numIngredients) {
+      matchColor = Color(0xffa5bda4);
+    } else if (recipeMatch.matchedIngredients / recipeMatch.numIngredients >
+        .7) {
+      matchColor = Color(0xffe3dfa6);
+    } else {
+      // matchColor = Color(0xffe3dfa6);
+
+      matchColor = Color(0xffffffff);
+    }
+
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -229,7 +242,7 @@ class RecipeCard extends StatelessWidget {
                     Spacer(),
                     Container(
                       decoration: BoxDecoration(
-                          color: Color(0xffffffff),
+                          color: matchColor,
                           borderRadius: BorderRadius.circular(defaultSize * .5),
                           boxShadow: [
                             BoxShadow(

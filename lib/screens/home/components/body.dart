@@ -86,7 +86,7 @@ class _BodyState extends State<Body> {
                                 : 0,
                         mainAxisSpacing: 20,
                         childAspectRatio: 2.0,
-                        children: buildList(press: _showSubCategoryPanel),
+                        children: buildList(press: setIndex),
                       ),
                     ),
                   ),
@@ -150,9 +150,148 @@ class _BodyState extends State<Body> {
                       );
                     },
                   ),
+              5: (BuildContext context) => StreamBuilder(
+                    stream: DatabaseService(uid: user.uid)
+                        .streamPantryItemsByCategory("Fruit and Vegetables"),
+                    builder: (context, snapshot) {
+                      var data = snapshot.data;
+                      if (data == null) return Loading();
+                      return Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.defaultSize * 2.0),
+                          child: ListView(
+                            children: buildPantryItemList(data),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+              6: (BuildContext context) => StreamBuilder(
+                    stream: DatabaseService(uid: user.uid)
+                        .streamPantryItemsByCategory("Meat and Seafood"),
+                    builder: (context, snapshot) {
+                      var data = snapshot.data;
+                      if (data == null) return Loading();
+                      return Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.defaultSize * 2.0),
+                          child: ListView(
+                            children: buildPantryItemList(data),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+              7: (BuildContext context) => StreamBuilder(
+                    stream: DatabaseService(uid: user.uid)
+                        .streamPantryItemsByCategory("Dairy"),
+                    builder: (context, snapshot) {
+                      var data = snapshot.data;
+                      if (data == null) return Loading();
+                      return Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.defaultSize * 2.0),
+                          child: ListView(
+                            children: buildPantryItemList(data),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+              7: (BuildContext context) => StreamBuilder(
+                    stream: DatabaseService(uid: user.uid)
+                        .streamPantryItemsByCategory("Snacks"),
+                    builder: (context, snapshot) {
+                      var data = snapshot.data;
+                      if (data == null) return Loading();
+                      return Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.defaultSize * 2.0),
+                          child: ListView(
+                            children: buildPantryItemList(data),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+              8: (BuildContext context) => StreamBuilder(
+                    stream: DatabaseService(uid: user.uid)
+                        .streamPantryItemsByCategory("Dry Items"),
+                    builder: (context, snapshot) {
+                      var data = snapshot.data;
+                      if (data == null) return Loading();
+                      return Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.defaultSize * 2.0),
+                          child: ListView(
+                            children: buildPantryItemList(data),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+              9: (BuildContext context) => StreamBuilder(
+                    stream: DatabaseService(uid: user.uid)
+                        .streamPantryItemsByCategory("Spices"),
+                    builder: (context, snapshot) {
+                      var data = snapshot.data;
+                      if (data == null) return Loading();
+                      return Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.defaultSize * 2.0),
+                          child: ListView(
+                            children: buildPantryItemList(data),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+              10: (BuildContext context) => StreamBuilder(
+                    stream: DatabaseService(uid: user.uid)
+                        .streamPantryItemsByCategory("Condiments"),
+                    builder: (context, snapshot) {
+                      var data = snapshot.data;
+                      if (data == null) return Loading();
+                      return Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.defaultSize * 2.0),
+                          child: ListView(
+                            children: buildPantryItemList(data),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+              11: (BuildContext context) => StreamBuilder(
+                    stream: DatabaseService(uid: user.uid)
+                        .streamPantryItemsByCategory("Other"),
+                    builder: (context, snapshot) {
+                      var data = snapshot.data;
+                      if (data == null) return Loading();
+                      return Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.defaultSize * 2.0),
+                          child: ListView(
+                            children: buildPantryItemList(data),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
             },
             fallbackBuilder: (BuildContext context) =>
                 Text("None of the cases matched"),
+          ),
+          SizedBox(
+            height: 23,
           ),
         ],
       ),
@@ -165,15 +304,15 @@ class _BodyState extends State<Body> {
       (index) => SubCategoryCard(
         subCategory: subCategories[index],
         press: () {
-          print("Pressing: " + subCategories[index].title);
+          press(5 + index);
         },
       ),
     );
-    list.add(
-      AddNewCategory(
-        press: press,
-      ),
-    );
+    // list.add(
+    //   AddNewCategory(
+    //     press: press,
+    //   ),
+    // );
     return list;
   }
 
