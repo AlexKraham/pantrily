@@ -63,6 +63,12 @@ class DatabaseService {
         list.docs.map((doc) => PantryItem.fromFireStore(doc)).toList());
   }
 
+  Stream<List<Recipe>> streamRecipes() {
+    var ref = recipeCollection.where('uid', isEqualTo: uid);
+    return ref.snapshots().map(
+        (list) => list.docs.map((doc) => Recipe.fromFirestore(doc)).toList());
+  }
+
   Future<void> updateUserData(
       {String name, String email, String imgSrc}) async {
     return await userCollection.doc(uid).set({

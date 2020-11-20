@@ -10,6 +10,7 @@ class RecipeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     // RecipeBuilder recipeBuilder = Provider.of<RecipeBuilder>(context);
     // print(recipeBuilder);
+    var recipes = Provider.of<List<Recipe>>(context) ?? [];
 
     TextEditingController _searchController = TextEditingController();
     final defaultSize = SizeConfig.defaultSize;
@@ -78,22 +79,11 @@ class RecipeBody extends StatelessWidget {
                         : 0,
                 mainAxisSpacing: 20,
                 childAspectRatio: 2.0,
-                children: [
-                  RecipeCard(
-                    recipe: Recipe(
-                      title: "Chicken Alfredo",
-                      description: "Yummy and delicious pasta",
-                      imgSrc: kAnonRecipeImgSrc,
-                    ),
-                  ),
-                  RecipeCard(
-                    recipe: Recipe(
-                      title: "Caesar Salad",
-                      description: "A salad for anyone to enjoy",
-                      imgSrc: kAnonRecipeImgSrc,
-                    ),
-                  ),
-                ],
+                children: List.generate(
+                    recipes.length,
+                    (i) => RecipeCard(
+                          recipe: recipes[i],
+                        )),
               ),
             ),
           ),
@@ -102,6 +92,23 @@ class RecipeBody extends StatelessWidget {
     );
   }
 }
+
+// [
+// RecipeCard(
+// recipe: Recipe(
+// title: "Chicken Alfredo",
+// description: "Yummy and delicious pasta",
+// imgSrc: kAnonRecipeImgSrc,
+// ),
+// ),
+// RecipeCard(
+// recipe: Recipe(
+// title: "Caesar Salad",
+// description: "A salad for anyone to enjoy",
+// imgSrc: kAnonRecipeImgSrc,
+// ),
+// ),
+// ],
 
 class RecipeCard extends StatelessWidget {
   const RecipeCard({

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pantrily/models/RecipeBuilder.dart';
+import 'package:pantrily/models/user.dart';
+import 'package:pantrily/services/database.dart';
 import 'package:pantrily/shared/components/bottom_nav_bar.dart';
 import 'package:pantrily/shared/constants.dart';
 import 'package:pantrily/shared/size_config.dart';
@@ -11,11 +13,16 @@ import 'components/recipe_body.dart';
 class RecipeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AppUser>(context);
+
     print("Building recipe screen");
-    return Scaffold(
-      appBar: buildAppBar(),
-      body: RecipeBody(),
-      bottomNavigationBar: BottomNavBar(),
+    return StreamProvider.value(
+      value: DatabaseService(uid: user.uid).streamRecipes(),
+      child: Scaffold(
+        appBar: buildAppBar(),
+        body: RecipeBody(),
+        bottomNavigationBar: BottomNavBar(),
+      ),
     );
   }
 
