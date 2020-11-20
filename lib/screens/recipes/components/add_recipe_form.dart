@@ -5,6 +5,7 @@ import 'package:pantrily/models/RecipeBuilder.dart';
 import 'package:pantrily/models/user.dart';
 import 'package:pantrily/screens/recipes/components/add_ingredient_form.dart';
 import 'package:pantrily/screens/recipes/components/add_step_form.dart';
+import 'package:pantrily/services/database.dart';
 import 'package:pantrily/shared/components/bottom_nav_bar.dart';
 import 'package:pantrily/shared/constants.dart';
 import 'package:pantrily/shared/size_config.dart';
@@ -57,6 +58,11 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
           });
     }
 
+    void addRecipe() async {
+      await DatabaseService(uid: user.uid)
+          .addRecipe(recipe: recipeBuilder.recipe);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
@@ -87,6 +93,12 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
                   // builder.setTitle(val);
                   // print(builder.recipe.title);
                 }),
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
               ),
               SizedBox(
                 height: 20,
@@ -145,16 +157,13 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
                         defaultSize: defaultSize, title: "Directions"),
                     Expanded(
                       child: ListView(
-                        // children: directions.map((direction) {
-                        //   return DirectionCard(
-                        //     direction: direction,
-                        //   );
-                        // }).toList(),
-                        children: [
-                          DirectionCard(
-                            direction: "test",
+                        children: List.generate(
+                          directions.length,
+                          (index) => DirectionCard(
+                            direction: directions[index],
+                            num: index + 1,
                           ),
-                        ],
+                        ),
                       ),
                     ),
                     GestureDetector(
@@ -202,8 +211,14 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
                   ),
                 ),
                 onTap: () {
-                  print("tapping");
-                  _showAddIngredientForm();
+                  // build the recipe
+                  recipeBuilder.recipe.uid = user.uid;
+
+                  if (_formKey.currentState.validate()) {
+                    addRecipe();
+                    recipeBuilder.clear();
+                    Navigator.pop(context);
+                  }
                 },
               ),
             ],
@@ -324,7 +339,7 @@ class DirectionCard extends StatelessWidget {
                 border: Border.all(width: 3, color: kPrimaryColor),
               ),
               child: Text(
-                "1",
+                num.toString(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: kPrimaryColor,
@@ -339,8 +354,7 @@ class DirectionCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 14),
               child: Column(
                 children: [
-                  Text(
-                      "ACBABEIOCNIOECO:Isdkjflka;sdkjskl;djfk;lsdjk;lfjsd;klfjdks;ljfk;lsdjfk;ljsd;kljfkld;jskl;jsadljsl;kdjckl;sjadkl;cja;klsdj;lkcjs;lkjcs;klk;djskl;cjd;sfdl;N:AJ:KLSJKL:DJ")
+                  Text(direction),
                 ],
               ),
             ),

@@ -20,6 +20,11 @@ class RecipeBuilder extends ChangeNotifier {
     notifyListeners();
   }
 
+  void clear() {
+    recipe = new Recipe(ingredients: [], directions: []);
+    notifyListeners();
+  }
+
   Recipe getRecipe() {
     return recipe;
   }

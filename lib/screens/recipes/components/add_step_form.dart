@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pantrily/models/RecipeBuilder.dart';
 import 'package:pantrily/shared/constants.dart';
 import 'package:pantrily/shared/size_config.dart';
+import 'package:provider/provider.dart';
 
 class AddStepForm extends StatefulWidget {
   @override
@@ -13,6 +15,7 @@ class _AddStepFormState extends State<AddStepForm> {
   String _currentStep;
   @override
   Widget build(BuildContext context) {
+    RecipeBuilder recipeBuilder = Provider.of<RecipeBuilder>(context);
     final defaultSize = SizeConfig.defaultSize;
     return Form(
       key: _formKey,
@@ -57,6 +60,7 @@ class _AddStepFormState extends State<AddStepForm> {
                   // Ingredient ingredient =
                   // Ingredient(foodItem: foodItem, count: _currentCount);
                   // recipeBuilder.addIngredient(ingredient);
+                  recipeBuilder.addDirection(_currentStep);
                   Navigator.pop(context);
                 }
                 // recipe

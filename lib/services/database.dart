@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pantrily/models/PantryItem.dart';
+import 'package:pantrily/models/Recipe.dart';
 import 'package:pantrily/models/SubCategory.dart';
 import 'package:pantrily/models/brew.dart';
 import 'package:pantrily/models/user.dart';
@@ -24,6 +25,9 @@ class DatabaseService {
 
   final CollectionReference pantryItemCollection =
       FirebaseFirestore.instance.collection("pantryitems");
+
+  final CollectionReference recipeCollection =
+      FirebaseFirestore.instance.collection("recipes");
 
   // Get a stream of a single pantry item
   Stream<PantryItem> streamPantryItem(String id) {
@@ -96,6 +100,33 @@ class DatabaseService {
       'area': area,
       'count': count,
       'date': DateTime.now(),
+    });
+  }
+
+  Future<void> addRecipe({Recipe recipe}) async {
+    List ingredients = recipe.ingredients;
+    return recipeCollection.add({
+      'title': recipe.title,
+      'description': recipe.description ?? "",
+      'ingredients': List.generate(
+          recipe.ingredients.length,
+          (i) => {
+                'label': ingredients[i].foodItem.label,
+                'imgSrc': ingredients[i].foodItem.imgSrc,
+                'foodId': ingredients[i].foodItem.foodId,
+                'count': ingredients[i].count,
+              }),
+      'directions': recipe.directions,
+      'uid': recipe.uid
+      // 'ingredients': recipe.ingredients.map(
+      //   (ingredient) => {
+      //     'label': ingredient.foodItem.label,
+      //     'imgSrc': ingredient.foodItem.imgSrc,
+      //     'foodId': ingredient.foodItem.foodId,
+      //     'count': ingredient.count,
+      //   },
+      // ),
+      // 'directions': recipe.directions ?? [],
     });
   }
 
