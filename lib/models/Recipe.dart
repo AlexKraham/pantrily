@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pantrily/models/Ingredient.dart';
 import 'package:pantrily/models/PantryItem.dart';
 
 class Recipe {
   String title;
   String description;
   String imgSrc;
-  List<String> ingredients; // this will be id's of each ingredient
+  List<Ingredient> ingredients; // this will be id's of each ingredient
   List<String> directions;
   String id;
   String uid;

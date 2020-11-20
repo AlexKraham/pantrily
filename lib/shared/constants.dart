@@ -11,10 +11,8 @@ const textInputDecoration = InputDecoration(
   ),
 );
 
-const kRecipeTextStyle = TextStyle(
-  fontSize: 22,
-  fontWeight: FontWeight.w500,
-);
+const kRecipeTextStyle =
+    TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white);
 
 const kPrimaryColor = Color(0xFFE18B23);
 const kTextColor = Color(0xFF202E2E);

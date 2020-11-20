@@ -5,6 +5,7 @@ import 'package:pantrily/screens/add/components/food_item_card.dart';
 import 'package:pantrily/screens/add/components/search_form.dart';
 import 'package:pantrily/services/food_item_api.dart';
 import 'package:pantrily/shared/size_config.dart';
+import 'package:provider/provider.dart';
 
 class AddIngredientForm extends StatefulWidget {
   @override
@@ -47,8 +48,18 @@ class _AddIngredientFormState extends State<AddIngredientForm> {
 
   @override
   Widget build(BuildContext context) {
+    RecipeBuilder recipeBuilder = Provider.of<RecipeBuilder>(context);
+    // print(recipeBuilder.recipe.title);
     return Column(
       children: [
+        Text(
+          "Add new ingredient",
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
         SearchForm(searchController: _searchController, press: pressSearch),
         Flexible(
           child: ListView(

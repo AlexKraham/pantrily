@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pantrily/models/PantryItem.dart';
+import 'package:pantrily/models/RecipeBuilder.dart';
 import 'package:pantrily/screens/add/add_screen.dart';
 import 'package:pantrily/screens/authenticate/authenticate.dart';
 import 'package:pantrily/screens/profile/profile_screen.dart';
@@ -25,31 +26,38 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<AppUser>.value(
-      value: AuthService().user,
-      child: ChangeNotifierProvider(
-        create: (context) => NavItems(),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: "Pantrily",
-          theme: ThemeData(
-            backgroundColor: Colors.white,
-            appBarTheme: AppBarTheme(
-              color: Colors.white,
-              elevation: 0,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(
+          value: RecipeBuilder(),
+        ),
+      ],
+      child: StreamProvider<AppUser>.value(
+        value: AuthService().user,
+        child: ChangeNotifierProvider(
+          create: (context) => NavItems(),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: "Pantrily",
+            theme: ThemeData(
+              backgroundColor: Colors.white,
+              appBarTheme: AppBarTheme(
+                color: Colors.white,
+                elevation: 0,
+              ),
+              scaffoldBackgroundColor: Colors.white,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
-            scaffoldBackgroundColor: Colors.white,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
+            home: Wrapper(),
+            routes: <String, WidgetBuilder>{
+              '/authenticate': (BuildContext context) => new Authenticate(),
+              '/profile': (BuildContext context) => new ProfileScreen(),
+              '/home': (BuildContext context) => new Wrapper(),
+              '/add': (BuildContext context) => new AddScreen(),
+              '/recipes': (BuildContext context) => new RecipeScreen(),
+              '/addrecipe': (BuildContext context) => new AddRecipeForm(),
+            },
           ),
-          home: Wrapper(),
-          routes: <String, WidgetBuilder>{
-            '/authenticate': (BuildContext context) => new Authenticate(),
-            '/profile': (BuildContext context) => new ProfileScreen(),
-            '/home': (BuildContext context) => new Wrapper(),
-            '/add': (BuildContext context) => new AddScreen(),
-            '/recipes': (BuildContext context) => new RecipeScreen(),
-            '/addrecipe': (BuildContext context) => new AddRecipeForm(),
-          },
         ),
       ),
     );

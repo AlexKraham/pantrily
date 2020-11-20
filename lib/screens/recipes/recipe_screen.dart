@@ -12,13 +12,10 @@ class RecipeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("Building recipe screen");
-    return ChangeNotifierProvider.value(
-      value: RecipeBuilder(),
-      child: Scaffold(
-        appBar: buildAppBar(),
-        body: RecipeBody(),
-        bottomNavigationBar: BottomNavBar(),
-      ),
+    return Scaffold(
+      appBar: buildAppBar(),
+      body: RecipeBody(),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 
